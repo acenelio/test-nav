@@ -1,18 +1,16 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
+using NavGame.Character;
 
 [RequireComponent(typeof(NavMeshAgent))]
-public class PlayerController : MonoBehaviour
+public class PlayerController : BasicMotionController
 {
     public int RayRange = 1000;
 
     Camera Cam;
 
-    NavMeshAgent Agent;
-
     void Start()
     {
-        Agent = GetComponent<NavMeshAgent>(); 
         Cam = Camera.main;
     }
 
@@ -25,7 +23,7 @@ public class PlayerController : MonoBehaviour
             if (Physics.Raycast(ray, out hit, RayRange)) {
                 Debug.Log("HIT " + hit.collider.gameObject.name);
                 if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Walkable")) {
-                    Agent.SetDestination(hit.point); 
+                    MoveToPoint(hit.point);
                 }
             }
         }
