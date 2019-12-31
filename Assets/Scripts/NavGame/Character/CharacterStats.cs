@@ -1,0 +1,14 @@
+﻿using System;
+
+namespace NavGame.Character
+{
+    [Serializable]
+    public class CharacterStats {
+        public int MaxHealth = 100;
+
+        public int Damage = 10;
+        public int Armor = 1;
+
+        public float AttackSpeed = 1f;
+    }
+}
