@@ -10,5 +10,8 @@ namespace NavGame.Character
         public int Armor = 1;
 
         public float AttackSpeed = 1f;
+
+        public float MeleeRange = 1f;
+        public float RangedRange = 5f;
     }
 }

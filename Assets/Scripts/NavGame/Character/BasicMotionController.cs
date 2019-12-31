@@ -4,8 +4,8 @@ using UnityEngine.AI;
 namespace NavGame.Character
 {
     public delegate void OnStartMoveToPointCallBack(Vector3 point);
-    public delegate void OnStartMoveToTargetCallBack(Interactable target);
-    public delegate void OnReachTargetCallBack(Interactable target);
+    public delegate void OnStartMoveToTargetCallBack(INavigable target);
+    public delegate void OnReachTargetCallBack(INavigable target);
     public delegate void OnReachDestinationCallBack();
     public delegate void OnCancelMoveCallBack();
 
@@ -14,7 +14,7 @@ namespace NavGame.Character
     {
         protected NavMeshAgent Agent;
 
-        public Interactable Target { get; private set; }
+        public INavigable Target { get; private set; }
 
         public OnStartMoveToPointCallBack OnStartMoveToPoint;
         public OnStartMoveToTargetCallBack OnStartMoveToTarget;
@@ -47,7 +47,7 @@ namespace NavGame.Character
                 CancelMove();
             }
 
-            FixDestinationSpinningBug();
+            //FixDestinationSpinningBug(); // weird behaviour when pushing another character
         }
 
         public void CancelMove()
@@ -62,18 +62,17 @@ namespace NavGame.Character
             }
         }
 
-        public void StartMoveToTarget(Interactable target)
+        public void StartMoveToTarget(INavigable target)
         {
             CancelMove();
             Target = target;
-            Agent.stoppingDistance = target.InteractRadius;
-            Agent.SetDestination(target.gameObject.transform.position);
+            Agent.stoppingDistance = target.ContactRadius();
+            Agent.SetDestination(target.ToGameObject().transform.position);
             if (OnStartMoveToTarget != null)
             {
                 OnStartMoveToTarget(target);
             }
         }
-
         public void StartMoveToPoint(Vector3 point)
         {
             CancelMove();

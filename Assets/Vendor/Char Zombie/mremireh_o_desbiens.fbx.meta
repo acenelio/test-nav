@@ -133,45 +133,35 @@ ModelImporter:
     13700002: mremireh_shoe
   externalObjects:
   - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: emireh_body_material
-    second: {fileID: 2100000, guid: 5df1ef00c69a28a4d836ffa0ef076bea, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: emireh_shoe_material
-    second: {fileID: 2100000, guid: 23ddde086a6906c46832c17de1661e47, type: 2}
-  - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: mremireh_body__diffuse
-    second: {fileID: 2800000, guid: c17a02603083df14dbb7883f0956426d, type: 3}
+    second: {fileID: 2800000, guid: da276dbe5d9233b45b0e304bf0aa6f8f, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: mremireh_body_normal
-    second: {fileID: 2800000, guid: e88a5f16680ef2e4b8b80d7d40e23f0a, type: 3}
+    second: {fileID: 2800000, guid: acc07f68ee7aeca43b43287fc0c5f720, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: mremireh_body_specular
-    second: {fileID: 2800000, guid: 098976449cab3c147873856aadd8acc4, type: 3}
+    second: {fileID: 2800000, guid: d5cf6cc9b0612184bb578dfdbfaa4111, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: mremireh_shoe_diffuse
-    second: {fileID: 2800000, guid: c69fc2b30f299b54ab7a2ff600f5aaa5, type: 3}
+    second: {fileID: 2800000, guid: 5c9788848856c724b96b7014d70f7dd1, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: mremireh_shoe_normal
-    second: {fileID: 2800000, guid: 409d0fc0a96fe0046b235240fa0adc48, type: 3}
+    second: {fileID: 2800000, guid: c7903a229ba148e4e9a5800ad16a0a48, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: mremireh_shoe_specular
-    second: {fileID: 2800000, guid: bc83336f1cb30b142914ae1cc857fbce, type: 3}
+    second: {fileID: 2800000, guid: f2af08cc9ef960c43a92e6b0f7e024fc, type: 3}
   materials:
     importMaterials: 1
     materialName: 0

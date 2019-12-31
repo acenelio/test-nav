@@ -2,7 +2,7 @@
 
 namespace NavGame.Character
 {
-    public abstract class Interactable : MonoBehaviour
+    public abstract class Interactablex : MonoBehaviour
     {
         public float InteractRadius = 2f;
 
