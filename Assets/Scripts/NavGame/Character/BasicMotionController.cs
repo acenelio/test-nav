@@ -4,8 +4,8 @@ using UnityEngine.AI;
 namespace NavGame.Character
 {
     public delegate void OnStartMoveToPointCallBack(Vector3 point);
-    public delegate void OnStartMoveToTargetCallBack(INavigable target);
-    public delegate void OnReachTargetCallBack(INavigable target);
+    public delegate void OnStartMoveToTargetCallBack(IReachable target);
+    public delegate void OnReachTargetCallBack(IReachable target);
     public delegate void OnReachDestinationCallBack();
     public delegate void OnCancelMoveCallBack();
 
@@ -14,7 +14,7 @@ namespace NavGame.Character
     {
         protected NavMeshAgent Agent;
 
-        public INavigable Target { get; private set; }
+        public IReachable Target { get; private set; }
 
         public OnStartMoveToPointCallBack OnStartMoveToPoint;
         public OnStartMoveToTargetCallBack OnStartMoveToTarget;
@@ -62,7 +62,7 @@ namespace NavGame.Character
             }
         }
 
-        public void StartMoveToTarget(INavigable target)
+        public void StartMoveToTarget(IReachable target)
         {
             CancelMove();
             Target = target;
@@ -73,6 +73,7 @@ namespace NavGame.Character
                 OnStartMoveToTarget(target);
             }
         }
+        
         public void StartMoveToPoint(Vector3 point)
         {
             CancelMove();

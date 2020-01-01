@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using NavGame.Character;
 
-public class Player : Character, INavigable
+public class Player : Character, IReachable
 {
     [SerializeField]
     float contactRadius = 1.5f;

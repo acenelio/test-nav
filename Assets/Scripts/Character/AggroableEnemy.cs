@@ -2,7 +2,7 @@
 using NavGame.Character;
 
 [RequireComponent(typeof(BasicMotionController))]
-public class AggroableEnemy : Character, INavigable
+public class AggroableEnemy : Character, IReachable
 {
     [SerializeField]
     float contactRadius = 1.5f;
@@ -10,7 +10,7 @@ public class AggroableEnemy : Character, INavigable
 
     public float AngularSpeed = 5f;
 
-    INavigable Target;
+    IReachable Target;
 
     BasicMotionController motionController;
 

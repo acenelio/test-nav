@@ -2,7 +2,7 @@
 
 namespace NavGame.Character
 {
-    public interface INavigable
+    public interface IReachable
     {
         float ContactRadius();
 
