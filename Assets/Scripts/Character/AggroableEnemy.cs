@@ -33,10 +33,10 @@ public class AggroableEnemy : Character
         if (distance <= AggroRadius)
         {
             locomotionController.StartMoveToTarget(Target);
+            locomotionController.FaceTarget();
             if (distance <= Target.ContactRadius) {
                 combatController.MeleeAttack(Target);
             }
-            locomotionController.FaceTarget();
         }
         else
         {

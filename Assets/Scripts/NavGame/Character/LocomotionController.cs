@@ -24,22 +24,20 @@ namespace NavGame.Character
 
         protected virtual void LateUpdate()
         {
-            if (ReachedDestination())
+            if (Stopped())
             {
-                if (OnReachDestination != null)
-                {
-                    OnReachDestination();
-                }
-
                 if (Target != null)
                 {
+                    Debug.Log("OnReachTarget would be triggered. Target: " + Target.gameObject.name);
+                    Target = null;
+                    Agent.isStopped = true;
+                    Agent.ResetPath();
+                    Agent.stoppingDistance = 0f;
                     if (OnReachTarget != null)
-                    {
+                    {                        
                         OnReachTarget(Target);
                     }
                 }
-
-                CancelMove();
             }
 
             //FixDestinationSpinningBug(); // weird behaviour when pushing another character
@@ -80,7 +78,7 @@ namespace NavGame.Character
         }
 
         //https://answers.unity.com/questions/324589/how-can-i-tell-when-a-navmesh-has-reached-its-dest.html
-        bool ReachedDestination()
+        bool Stopped()
         {
             if (!Agent.pathPending)
             {

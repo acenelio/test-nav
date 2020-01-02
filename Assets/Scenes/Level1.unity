@@ -467,6 +467,7 @@ GameObject:
   - component: {fileID: 220803817}
   - component: {fileID: 220803816}
   - component: {fileID: 220803818}
+  - component: {fileID: 220803814}
   - component: {fileID: 220803812}
   m_Layer: 0
   m_Name: Player
@@ -491,10 +492,13 @@ MonoBehaviour:
     MaxHealth: 100
     Damage: 10
     Armor: 1
-    AttackSpeed: 1
+    AttackSpeed: 2
     MeleeRange: 1
     RangedRange: 5
+  ContactRadius: 1.5
+  CurrentHealth: 0
   RayRange: 1000
+  FacingAngle: 30
   WalkableLayer:
     serializedVersion: 2
     m_Bits: 512
@@ -516,9 +520,28 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 644180820}
+  - {fileID: 1578608176}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &220803814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 220803811}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 628a0f8438e33e54989f79c2efb15743, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HitSound: BookHit
+  PunchPoint: {fileID: 1578608176}
+  PunchEffectPrefab: {fileID: 7323526044739450854, guid: 32ef4257e92903d4a9d9cc4b2357deaa,
+    type: 3}
+  PunchHitDelay: 0.5
+  CombatCooldown: 5
 --- !u!195 &220803815
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2197,6 +2220,8 @@ MonoBehaviour:
     AttackSpeed: 1
     MeleeRange: 1
     RangedRange: 5
+  ContactRadius: 1.5
+  CurrentHealth: 0
   AggroRadius: 6
   AngularSpeed: 5
 --- !u!195 &1052953609
@@ -2235,7 +2260,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HitSound: EnemyHit
   PunchPoint: {fileID: 1140098161}
-  PunchEffectPrefab: {fileID: 7323526044739450854, guid: 32ef4257e92903d4a9d9cc4b2357deaa,
+  PunchEffectPrefab: {fileID: 829955639146477814, guid: 0666feffc10aba04e9f0b32fc0ee75a4,
     type: 3}
   PunchHitDelay: 0.5
   CombatCooldown: 5
@@ -3925,6 +3950,36 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1550688042}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1578608175
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1578608176}
+  m_Layer: 0
+  m_Name: PunchPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1578608176
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1578608175}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.91, z: 0.562}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 220803813}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1587654016
 GameObject:
   m_ObjectHideFlags: 0

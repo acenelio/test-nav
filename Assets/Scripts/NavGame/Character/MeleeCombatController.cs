@@ -7,7 +7,6 @@ namespace NavGame.Character
     /// This class serves a Character, providing MeleeAttack(target) funcionality, and 
     /// internally handling attack and combat cooldowns, as well as IsInCombat state  
     /// </summary>
-    [RequireComponent(typeof(Character))]
     public class MeleeCombatController : MonoBehaviour
     {
         public string HitSound;
@@ -119,8 +118,9 @@ namespace NavGame.Character
             }
         }
 
-        void LeaveCombat()
+        public void LeaveCombat()
         {
+            Debug.Log("LeaveCombat would be triggered. Self: " + gameObject.name);
             IsInCombat = false;
             if (OnLeaveCombat != null)
             {
