@@ -2,16 +2,14 @@
 
 namespace NavGame.Character
 {
-    public delegate void OnHealthChangedCallBack(int maxHealth, int currentHealth);
-
-    public delegate void OnDiedCallBack();
-
     public class Character : MonoBehaviour
     {
         public CharacterStats Stats;
-        public int CurrentHealth { get; private set; }
-        public OnHealthChangedCallBack OnHealthChanged;
-        public OnDiedCallBack OnDied;
+        public float ContactRadius = 1.5f;
+        public int CurrentHealth;
+        
+        public OnHealthChangedEvent OnHealthChanged;
+        public OnDiedEvent OnDied;
 
         void Awake () {
             CurrentHealth = Stats.MaxHealth;

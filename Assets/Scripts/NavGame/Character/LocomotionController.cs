@@ -3,24 +3,19 @@ using UnityEngine.AI;
 
 namespace NavGame.Character
 {
-    public delegate void OnStartMoveToPointCallBack(Vector3 point);
-    public delegate void OnStartMoveToTargetCallBack(IReachable target);
-    public delegate void OnReachTargetCallBack(IReachable target);
-    public delegate void OnReachDestinationCallBack();
-    public delegate void OnCancelMoveCallBack();
-
     [RequireComponent(typeof(NavMeshAgent))]
-    public class BasicMotionController : MonoBehaviour
+    public class LocomotionController : MonoBehaviour
     {
         protected NavMeshAgent Agent;
+        public float AngularSpeed = 5f;
 
-        public IReachable Target { get; private set; }
+        public OnStartMoveToPointEvent OnStartMoveToPoint;
+        public OnStartMoveToTargetEvent OnStartMoveToTarget;
+        public OnReachTargetEvent OnReachTarget;
+        public OnReachDestinationEvent OnReachDestination;
+        public OnCancelMoveEvent OnCancelMove;
 
-        public OnStartMoveToPointCallBack OnStartMoveToPoint;
-        public OnStartMoveToTargetCallBack OnStartMoveToTarget;
-        public OnReachTargetCallBack OnReachTarget;
-        public OnReachDestinationCallBack OnReachDestination;
-        public OnCancelMoveCallBack OnCancelMove;
+        Character Target;
 
         protected virtual void Awake()
         {
@@ -62,18 +57,18 @@ namespace NavGame.Character
             }
         }
 
-        public void StartMoveToTarget(IReachable target)
+        public void StartMoveToTarget(Character target)
         {
             CancelMove();
             Target = target;
-            Agent.stoppingDistance = target.ContactRadius();
-            Agent.SetDestination(target.ToGameObject().transform.position);
+            Agent.stoppingDistance = target.ContactRadius;
+            Agent.SetDestination(target.transform.position);
             if (OnStartMoveToTarget != null)
             {
                 OnStartMoveToTarget(target);
             }
         }
-        
+
         public void StartMoveToPoint(Vector3 point)
         {
             CancelMove();
@@ -102,7 +97,8 @@ namespace NavGame.Character
 
         //https://www.reddit.com/r/Unity3D/comments/7yww7e/navmesh_agent_cant_reach_a_goal_and_spins_around/
         //https://answers.unity.com/questions/1086857/navmeshagent-spins-on-the-spot-when-close-to-desti.html
-        void FixDestinationSpinningBug() {
+        void FixDestinationSpinningBug()
+        {
             if (Agent.hasPath && (Agent.steeringTarget == Agent.destination))
             {
                 //Debug.Log ("Has path and steering target is destination");
@@ -117,6 +113,16 @@ namespace NavGame.Character
                     Agent.velocity = (Agent.desiredVelocity.normalized * Agent.velocity.magnitude);
                 }
             }
+        }
+
+        public void FaceTarget()
+        {
+            if (Target == null) {
+                return;
+            }
+            Vector3 direction = (Target.transform.position - transform.position).normalized;
+            Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * AngularSpeed);
         }
     }
 }

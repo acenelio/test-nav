@@ -1,24 +1,51 @@
 ﻿using UnityEngine;
 using NavGame.Character;
 
-public class Player : Character, IReachable
+public class Player : Character
 {
-    [SerializeField]
-    float contactRadius = 1.5f;
+    public int RayRange = 1000;
 
-    public float ContactRadius()
+    public LayerMask WalkableLayer;
+    public LayerMask EnemyLayer;
+    public LayerMask PickupLayer;
+
+    Camera Cam;
+    Character Target;
+
+    LocomotionController locomotionController;
+
+    void Start()
     {
-        return contactRadius;
+        Cam = Camera.main;
+        locomotionController = GetComponent<LocomotionController>();
+        //locomotionController.OnStartMoveToTarget += SetTarget;
     }
 
-    public GameObject ToGameObject()
+    void Update()
     {
-        return this.gameObject;
+        if (Input.GetMouseButtonDown(1))
+        {
+            Ray ray = Cam.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit, RayRange, WalkableLayer))
+            {
+                locomotionController.StartMoveToPoint(hit.point);
+            }
+
+            if (Physics.Raycast(ray, out hit, RayRange, EnemyLayer))
+            {
+                Character enemy = hit.collider.GetComponent<Character>();
+                //if (interactable.Distance(this)) {
+                //    RangeAttack(interactable);
+                //}
+            }
+        }
     }
 
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.grey;
-        Gizmos.DrawWireSphere(transform.position, ContactRadius());
+        Gizmos.DrawWireSphere(transform.position, ContactRadius);
     }
 }
