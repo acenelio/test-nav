@@ -718,6 +718,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ContactRadius: 1.5
   PickupSound: CoinPickup
+  ParticlesPrefab: {fileID: 8112824005265639227, guid: 504e4be07316e9845b24de3fd67b9cba,
+    type: 3}
 --- !u!1 &323184105
 GameObject:
   m_ObjectHideFlags: 0

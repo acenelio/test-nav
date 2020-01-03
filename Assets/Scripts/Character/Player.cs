@@ -36,7 +36,6 @@ public class Player : Character
 
             if (Physics.Raycast(ray, out hit, RayRange, EnemyLayer))
             {
-                Debug.Log("Hit enemy: " + hit.collider.name);
                 Character enemy = hit.collider.GetComponent<Character>();
                 if (enemy != null)
                 {
@@ -46,7 +45,6 @@ public class Player : Character
             }
             else if (Physics.Raycast(ray, out hit, RayRange, PickupLayer))
             {
-                Debug.Log("Hit collectible: " + hit.collider.name);
                 Collectible obj = hit.collider.GetComponent<Collectible>();
                 if (obj != null)
                 {
@@ -56,12 +54,10 @@ public class Player : Character
             }
             else if (Physics.Raycast(ray, out hit, RayRange, WalkableLayer))
             {
-                Debug.Log("Hit point: " + hit.point);
                 EnemyTarget = null;
                 PickupTarget = null;
                 locomotionController.MoveToPoint(hit.point);
             }
-
         }
 
         if (EnemyTarget != null)

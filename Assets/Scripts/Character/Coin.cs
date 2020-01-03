@@ -7,9 +7,11 @@ using NavGame.Managers;
 public class Coin : Collectible
 {
     public string PickupSound;
+    public GameObject ParticlesPrefab;
 
     protected override void DoActionOnPickup() {
         AudioManager.instance.Play(PickupSound, transform.position);
+        Instantiate(ParticlesPrefab, gameObject.transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 
