@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
-using NavGame.Character;
+using NavGame.Core;
+using NavGame.Managers;
 
 [RequireComponent(typeof(LocomotionController))]
 [RequireComponent(typeof(MeleeCombatController))]
@@ -13,7 +14,8 @@ public class Player : Character
     public LayerMask PickupLayer;
 
     Camera Cam;
-    public Character Target;
+    public Character EnemyTarget;
+    public Collectible PickupTarget;
 
     LocomotionController locomotionController;
     MeleeCombatController combatController;
@@ -32,35 +34,60 @@ public class Player : Character
             Ray ray = Cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit, RayRange, WalkableLayer))
-            {
-                Debug.Log("HIT Walkable " + hit.collider.name);
-                Target = null;
-                locomotionController.MoveToPoint(hit.point);
-            }
-
             if (Physics.Raycast(ray, out hit, RayRange, EnemyLayer))
             {
-                Debug.Log("HIT Enemy " + hit.collider.name);
+                Debug.Log("Hit enemy: " + hit.collider.name);
                 Character enemy = hit.collider.GetComponent<Character>();
                 if (enemy != null)
                 {
-                    Target = enemy;
+                    PickupTarget = null;
+                    EnemyTarget = enemy;
                 }
             }
+            else if (Physics.Raycast(ray, out hit, RayRange, PickupLayer))
+            {
+                Debug.Log("Hit collectible: " + hit.collider.name);
+                Collectible obj = hit.collider.GetComponent<Collectible>();
+                if (obj != null)
+                {
+                    EnemyTarget = null;
+                    PickupTarget = obj;
+                }
+            }
+            else if (Physics.Raycast(ray, out hit, RayRange, WalkableLayer))
+            {
+                Debug.Log("Hit point: " + hit.point);
+                EnemyTarget = null;
+                PickupTarget = null;
+                locomotionController.MoveToPoint(hit.point);
+            }
+
         }
 
-        if (Target != null) {
-            locomotionController.MoveToCharacter(Target);
-            locomotionController.FaceObjectFrame(Target.transform);
-            float distance = Vector3.Distance(Target.transform.position, transform.position);
-            if (distance <= Target.ContactRadius) {
-                combatController.MeleeAttack(Target);
+        if (EnemyTarget != null)
+        {
+            locomotionController.MoveToCharacter(EnemyTarget);
+            locomotionController.FaceObjectFrame(EnemyTarget.transform);
+            float distance = Vector3.Distance(EnemyTarget.transform.position, transform.position);
+            if (distance <= EnemyTarget.ContactRadius)
+            {
+                combatController.MeleeAttack(EnemyTarget);
+            }
+        }
+        else if (PickupTarget != null)
+        {
+            locomotionController.MoveToCollectible(PickupTarget);
+            float distance = Vector3.Distance(PickupTarget.transform.position, transform.position);
+            if (distance <= PickupTarget.ContactRadius)
+            {
+                PickupTarget.Pickup();
+                PickupTarget = null;
             }
         }
     }
 
-    protected override void Die() {
+    protected override void Die()
+    {
         NavigationManager.instance.ReloadCurrentScene();
     }
 

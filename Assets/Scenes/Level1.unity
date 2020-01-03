@@ -143,7 +143,7 @@ Transform:
   - {fileID: 235770894}
   - {fileID: 980482251}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &99271624
 GameObject:
@@ -508,8 +508,9 @@ MonoBehaviour:
     m_Bits: 1024
   PickupLayer:
     serializedVersion: 2
-    m_Bits: 0
-  Target: {fileID: 0}
+    m_Bits: 2048
+  EnemyTarget: {fileID: 0}
+  PickupTarget: {fileID: 0}
 --- !u!4 &220803813
 Transform:
   m_ObjectHideFlags: 0
@@ -525,7 +526,7 @@ Transform:
   - {fileID: 1578608176}
   - {fileID: 1254443388}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &220803814
 MonoBehaviour:
@@ -667,9 +668,10 @@ GameObject:
   m_Component:
   - component: {fileID: 305509808}
   - component: {fileID: 305509809}
-  m_Layer: 0
+  - component: {fileID: 305509810}
+  m_Layer: 11
   m_Name: Coin
-  m_TagString: Untagged
+  m_TagString: Coin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -681,13 +683,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 305509807}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.000073969364, y: 0.7351607, z: 0.023887664}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 540154020}
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_Father: {fileID: 804374497}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &305509809
 BoxCollider:
@@ -702,6 +704,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.51509917, y: 1, z: 1}
   m_Center: {x: -0.000000014901161, y: 0, z: 0}
+--- !u!114 &305509810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 305509807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b11d02603995db34b83500f0d7748222, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ContactRadius: 1.5
+  PickupSound: CoinPickup
 --- !u!1 &323184105
 GameObject:
   m_ObjectHideFlags: 0
@@ -795,7 +811,7 @@ RectTransform:
   - {fileID: 781438399}
   - {fileID: 398253863}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -992,7 +1008,7 @@ GameObject:
   - component: {fileID: 540154024}
   - component: {fileID: 540154023}
   - component: {fileID: 540154021}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Graphic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1689,6 +1705,37 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 791651322}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &804374496
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 804374497}
+  m_Layer: 11
+  m_Name: Pickup
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &804374497
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 804374496}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 305509808}
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &806261531
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2096,7 +2143,7 @@ Transform:
   m_Children:
   - {fileID: 1052953611}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1039818658
 PrefabInstance:
@@ -4115,7 +4162,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1606345017
 PrefabInstance:
@@ -5168,7 +5215,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1912694620
 MonoBehaviour:
@@ -5372,7 +5419,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using NavGame.Character;
+using NavGame.Core;
 
 [RequireComponent(typeof(LocomotionController))]
 [RequireComponent(typeof(MeleeCombatController))]

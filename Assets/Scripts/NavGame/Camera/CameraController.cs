@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace NavGame.Character
+namespace NavGame.View
 {
 	public class CameraController : MonoBehaviour
 	{

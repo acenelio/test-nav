@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using NavGame.Managers;
 
 public class PlayerManager : MonoBehaviour
 {

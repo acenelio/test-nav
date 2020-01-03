@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace NavGame.Character
+namespace NavGame.Core
 {
     [RequireComponent(typeof(Character))]
     public class HealthUIController : MonoBehaviour

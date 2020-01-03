@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NavGame.Character
+namespace NavGame.Core
 {
     [Serializable]
     public class CharacterStats {

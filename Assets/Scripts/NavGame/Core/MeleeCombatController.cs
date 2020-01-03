@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using UnityEngine;
+using NavGame.Managers;
 
-namespace NavGame.Character
+namespace NavGame.Core
 {
     /// <summary>
     /// This class serves a Character, providing MeleeAttack(target) funcionality, and 

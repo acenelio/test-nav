@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace NavGame.Character
+namespace NavGame.Core
 {
     public abstract class Character : MonoBehaviour
     {

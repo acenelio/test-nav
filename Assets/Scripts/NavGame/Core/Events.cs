@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace NavGame.Character
+namespace NavGame.Core
 {
     // CHARACTER EVENTS
     public delegate void OnHealthChangedEvent(int maxHealth, int currentHealth);
@@ -15,4 +15,7 @@ namespace NavGame.Character
     public delegate void OnAttackCooldownUpdateEvent(float remainingCooldown);
     public delegate void OnEnterCombatEvent();
     public delegate void OnLeaveCombatEvent();
+
+    // COLLECTIBLE EVENTS
+    public delegate void OnPickupEvent();
 }

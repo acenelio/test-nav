@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
 
-namespace NavGame.Character
+namespace NavGame.Core
 {
     [RequireComponent(typeof(NavMeshAgent))]
     public class LocomotionController : MonoBehaviour
@@ -25,6 +25,12 @@ namespace NavGame.Character
         {
             Agent.stoppingDistance = character.ContactRadius;
             Agent.SetDestination(character.transform.position);
+        }
+
+        public void MoveToCollectible(Collectible collectible)
+        {
+            Agent.stoppingDistance = collectible.ContactRadius;
+            Agent.SetDestination(collectible.transform.position);
         }
 
         public void MoveToPoint(Vector3 point)

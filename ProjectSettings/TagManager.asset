@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Tower
   - Bus
+  - Coin
   layers:
   - Default
   - TransparentFX
@@ -18,7 +19,7 @@ TagManager:
   - PostProcessing
   - Walkable
   - Enemies
-  - 
+  - Pickup
   - 
   - 
   - 
