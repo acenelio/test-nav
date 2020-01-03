@@ -557,7 +557,7 @@ MonoBehaviour:
     RangedRange: 5
   ContactRadius: 1.5
   CurrentHealth: 0
-  AttackRange: 8
+  AttackRange: 5
   RayRange: 1000
   FacingAngle: 30
   WalkableLayer:

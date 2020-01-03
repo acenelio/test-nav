@@ -12,14 +12,23 @@ namespace NavGame.Core
         public bool FaceTarget = false;
         public Character Target;
         Transform TargetHit;
+        bool IsInit = false;
 
         public GameObject HitParticles;
 
+        void Start()
+        {
+            if (!IsInit)
+            {
+                Debug.LogError("ProjectileController Init was not called. Destroying GameObject");
+                Destroy(gameObject);
+            }
+        }
+
         void Update()
         {
-            if (Target == null)
+            if (Target == null) // target may have died for another cause
             {
-                Debug.LogError("Projectile Target not set");
                 Destroy(gameObject);
                 return;
             }
@@ -32,7 +41,11 @@ namespace NavGame.Core
 
         void OnTriggerEnter(Collider other)
         {
-            Debug.Log("ENTER " + other.gameObject);
+            if (Target == null) // target may have died for another cause
+            {
+                Destroy(gameObject);
+                return;
+            }
             if (other.gameObject == Target.gameObject)
             {
                 Character targetCharacter = other.gameObject.GetComponent<Character>();
@@ -45,7 +58,7 @@ namespace NavGame.Core
             }
         }
 
-        public void SetTarget(Character target)
+        public void Init(Character target, int damage)
         {
             Target = target;
             TargetHit = target.gameObject.transform.Find("HitPoint");
@@ -53,11 +66,8 @@ namespace NavGame.Core
             {
                 TargetHit = target.gameObject.transform;
             }
-        }
-
-        public void SetDamage(int damage)
-        {
             Damage = damage;
+            IsInit = true;
         }
 
         void FaceTargetFrame()

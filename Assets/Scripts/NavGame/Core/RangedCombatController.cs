@@ -63,18 +63,17 @@ namespace NavGame.Core
         IEnumerator DoRangedAttackAfterDelay(Character targetCharacter, float delay)
         {
             yield return new WaitForSeconds(delay);
-            Cast(targetCharacter);
+            if (targetCharacter != null) // target may have died during delay
+            {
+                Cast(targetCharacter);
+            }
         }
 
         void Cast(Character targetCharacter)
         {
-            if (targetCharacter != null) // target may have died during delay
-            { 
-                GameObject projectile = Instantiate(ProjectilePrefab, CastPosition.position, Quaternion.identity) as GameObject;
-                ProjectileController controller = projectile.GetComponent<ProjectileController>();
-                controller.SetTarget(targetCharacter);
-                controller.SetDamage(Self.Stats.Damage);
-            }
+            GameObject projectile = Instantiate(ProjectilePrefab, CastPosition.position, Quaternion.identity) as GameObject;
+            ProjectileController controller = projectile.GetComponent<ProjectileController>();
+            controller.Init(targetCharacter, Self.Stats.Damage);
         }
 
         void DecreaseAttackCooldown()
