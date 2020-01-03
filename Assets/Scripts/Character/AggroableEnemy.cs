@@ -7,8 +7,6 @@ public class AggroableEnemy : Character
 {
     public float AggroRadius = 6f;
 
-    public float AngularSpeed = 5f;
-
     Character Target;
 
     LocomotionController locomotionController;
@@ -32,8 +30,8 @@ public class AggroableEnemy : Character
 
         if (distance <= AggroRadius)
         {
-            locomotionController.StartMoveToTarget(Target);
-            locomotionController.FaceTarget();
+            locomotionController.MoveToCharacter(Target);
+            locomotionController.FaceObjectFrame(Target.transform);
             if (distance <= Target.ContactRadius) {
                 combatController.MeleeAttack(Target);
             }
@@ -42,6 +40,10 @@ public class AggroableEnemy : Character
         {
             locomotionController.CancelMove();
         }
+    }
+
+    protected override void Die() {
+        Destroy(gameObject);
     }
 
     void OnDrawGizmosSelected()

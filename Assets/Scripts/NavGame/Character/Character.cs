@@ -2,7 +2,7 @@
 
 namespace NavGame.Character
 {
-    public class Character : MonoBehaviour
+    public abstract class Character : MonoBehaviour
     {
         public CharacterStats Stats;
         public float ContactRadius = 1.5f;
@@ -28,10 +28,13 @@ namespace NavGame.Character
             }
 
             if (CurrentHealth <= 0) {
+                Die();
                 if (OnDied != null) {
                     OnDied();
                 }
             }
         }
+
+        protected abstract void Die();
     }
 }

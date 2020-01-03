@@ -86,7 +86,7 @@ namespace NavGame.Character
                     OnMeleeAttackHit();
                 }
 
-                if (targetCharacter.CurrentHealth <= 0)
+                if (targetCharacter.CurrentHealth <= 0) // SHOULD BE TIED TO DIE EVENT
                 {
                     LeaveCombat();
                 }
@@ -112,9 +112,11 @@ namespace NavGame.Character
 
         void CheckCombatCooldown()
         {
-            if (Time.time - LastAttackTime > CombatCooldown)
-            {
-                LeaveCombat();
+            if (IsInCombat) {
+                if (Time.time - LastAttackTime > CombatCooldown)
+                {
+                    LeaveCombat();
+                }
             }
         }
 

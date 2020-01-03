@@ -15,8 +15,6 @@ public class Player : Character
     Camera Cam;
     public Character Target;
 
-    bool IsFocused = false;
-
     LocomotionController locomotionController;
     MeleeCombatController combatController;
 
@@ -25,7 +23,6 @@ public class Player : Character
         Cam = Camera.main;
         locomotionController = GetComponent<LocomotionController>();
         combatController = GetComponent<MeleeCombatController>();
-        combatController.OnLeaveCombat += LoseFocus;
     }
 
     void Update()
@@ -38,7 +35,8 @@ public class Player : Character
             if (Physics.Raycast(ray, out hit, RayRange, WalkableLayer))
             {
                 Debug.Log("HIT Walkable " + hit.collider.name);
-                locomotionController.StartMoveToPoint(hit.point);
+                Target = null;
+                locomotionController.MoveToPoint(hit.point);
             }
 
             if (Physics.Raycast(ray, out hit, RayRange, EnemyLayer))
@@ -47,15 +45,14 @@ public class Player : Character
                 Character enemy = hit.collider.GetComponent<Character>();
                 if (enemy != null)
                 {
-                    FocusTarget(enemy);
+                    Target = enemy;
                 }
             }
         }
 
-        if (IsFocused)
-        {
-            locomotionController.StartMoveToTarget(Target);
-            locomotionController.FaceTarget();
+        if (Target != null) {
+            locomotionController.MoveToCharacter(Target);
+            locomotionController.FaceObjectFrame(Target.transform);
             float distance = Vector3.Distance(Target.transform.position, transform.position);
             if (distance <= Target.ContactRadius) {
                 combatController.MeleeAttack(Target);
@@ -63,19 +60,8 @@ public class Player : Character
         }
     }
 
-    void FocusTarget(Character target) {
-        Target = target;
-        IsFocused = true;
-    }
-
-    void LoseFocus() {
-        Target = null;
-        IsFocused = false;
-    }
-
-    bool FacingTarget(Character target) {
-        Vector3 playerToTarget = target.transform.position - transform.position;
-        return Vector3.Angle(gameObject.transform.forward, playerToTarget) <= FacingAngle;
+    protected override void Die() {
+        NavigationManager.instance.ReloadCurrentScene();
     }
 
     void OnDrawGizmosSelected()
