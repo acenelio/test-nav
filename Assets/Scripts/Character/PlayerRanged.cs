@@ -3,9 +3,10 @@ using NavGame.Core;
 using NavGame.Managers;
 
 [RequireComponent(typeof(LocomotionController))]
-[RequireComponent(typeof(MeleeCombatController))]
-public class Player : Character
+[RequireComponent(typeof(RangedCombatController))]
+public class PlayerRanged : Character
 {
+    public float AttackRange = 8f;
     public int RayRange = 1000;
     public float FacingAngle = 30f;
 
@@ -18,13 +19,13 @@ public class Player : Character
     public Collectible PickupTarget;
 
     LocomotionController locomotionController;
-    MeleeCombatController combatController;
+    RangedCombatController combatController;
 
     void Start()
     {
         Cam = Camera.main;
         locomotionController = GetComponent<LocomotionController>();
-        combatController = GetComponent<MeleeCombatController>();
+        combatController = GetComponent<RangedCombatController>();
     }
 
     void Update()
@@ -65,9 +66,10 @@ public class Player : Character
             locomotionController.MoveToCharacter(EnemyTarget);
             locomotionController.FaceObjectFrame(EnemyTarget.transform);
             float distance = Vector3.Distance(EnemyTarget.transform.position, transform.position);
-            if (distance <= EnemyTarget.ContactRadius)
+            if (distance <= EnemyTarget.ContactRadius + AttackRange)
             {
-                combatController.MeleeAttack(EnemyTarget);
+                locomotionController.CancelMove();
+                combatController.RangedAttack(EnemyTarget);
             }
         }
         else if (PickupTarget != null)
@@ -91,5 +93,7 @@ public class Player : Character
     {
         Gizmos.color = Color.grey;
         Gizmos.DrawWireSphere(transform.position, ContactRadius);
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, AttackRange);
     }
 }

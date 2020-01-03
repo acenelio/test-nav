@@ -145,6 +145,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &45917688
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 45917689}
+  m_Layer: 10
+  m_Name: HitPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &45917689
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 45917688}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.92, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1052953611}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &99271624
 GameObject:
   m_ObjectHideFlags: 0
@@ -385,6 +415,36 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 100854901}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &134239935
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 134239936}
+  m_Layer: 0
+  m_Name: CastPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &134239936
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 134239935}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.141, z: 0.626}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 220803813}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &170076733
 GameObject:
   m_ObjectHideFlags: 0
@@ -469,7 +529,6 @@ GameObject:
   - component: {fileID: 220803818}
   - component: {fileID: 220803814}
   - component: {fileID: 220803812}
-  - component: {fileID: 220803819}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -486,18 +545,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 220803811}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd9513ef56b7ba44d8d9fa828d7c01bd, type: 3}
+  m_Script: {fileID: 11500000, guid: 77ff0fffafbd6144b9fda67a23e9b2a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Stats:
     MaxHealth: 100
     Damage: 10
     Armor: 1
-    AttackSpeed: 2
+    AttackSpeed: 1
     MeleeRange: 1
     RangedRange: 5
   ContactRadius: 1.5
   CurrentHealth: 0
+  AttackRange: 8
   RayRange: 1000
   FacingAngle: 30
   WalkableLayer:
@@ -525,6 +585,7 @@ Transform:
   - {fileID: 644180820}
   - {fileID: 1578608176}
   - {fileID: 1254443388}
+  - {fileID: 134239936}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -537,14 +598,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 220803811}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 628a0f8438e33e54989f79c2efb15743, type: 3}
+  m_Script: {fileID: 11500000, guid: 54ff0a9a857330c45bc6cc7a59a7848c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HitSound: BookHit
-  PunchPosition: {fileID: 1578608176}
-  PunchEffectPrefab: {fileID: 7323526044739450854, guid: 32ef4257e92903d4a9d9cc4b2357deaa,
+  CastSound: EnemyHit
+  CastPosition: {fileID: 134239936}
+  ProjectilePrefab: {fileID: 5397875623032528752, guid: dab1fe33ddcfdd441a984f255cae4862,
     type: 3}
-  PunchHitDelay: 0.5
+  CastDelay: 0.5
   CombatCooldown: 5
 --- !u!195 &220803815
 NavMeshAgent:
@@ -611,21 +672,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AngularSpeed: 5
---- !u!114 &220803819
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 220803811}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 335881b193b953b4abb9ca8d751111b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HealthUIPrefab: {fileID: 7097561509873794964, guid: 81fafaa58739c0144942a78caacc4e3a,
-    type: 3}
-  HealthPosition: {fileID: 1254443388}
 --- !u!1 &235770893
 GameObject:
   m_ObjectHideFlags: 0
@@ -2345,6 +2391,7 @@ Transform:
   - {fileID: 791651323}
   - {fileID: 1140098161}
   - {fileID: 1329566898}
+  - {fileID: 45917689}
   m_Father: {fileID: 1010060598}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

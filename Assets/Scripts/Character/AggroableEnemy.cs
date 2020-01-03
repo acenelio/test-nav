@@ -14,7 +14,7 @@ public class AggroableEnemy : Character
 
     void Start()
     {
-        Target = PlayerManager.instance.GetPlayer().GetComponent<Player>();
+        Target = PlayerManager.instance.GetPlayer().GetComponent<PlayerRanged>();
         locomotionController = GetComponent<LocomotionController>();
         combatController = GetComponent<MeleeCombatController>();
     }
