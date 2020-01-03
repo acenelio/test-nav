@@ -469,6 +469,7 @@ GameObject:
   - component: {fileID: 220803818}
   - component: {fileID: 220803814}
   - component: {fileID: 220803812}
+  - component: {fileID: 220803819}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -522,6 +523,7 @@ Transform:
   m_Children:
   - {fileID: 644180820}
   - {fileID: 1578608176}
+  - {fileID: 1254443388}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -538,7 +540,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HitSound: BookHit
-  PunchPoint: {fileID: 1578608176}
+  PunchPosition: {fileID: 1578608176}
   PunchEffectPrefab: {fileID: 7323526044739450854, guid: 32ef4257e92903d4a9d9cc4b2357deaa,
     type: 3}
   PunchHitDelay: 0.5
@@ -608,6 +610,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AngularSpeed: 5
+--- !u!114 &220803819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 220803811}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 335881b193b953b4abb9ca8d751111b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HealthUIPrefab: {fileID: 7097561509873794964, guid: 81fafaa58739c0144942a78caacc4e3a,
+    type: 3}
+  HealthPosition: {fileID: 1254443388}
 --- !u!1 &235770893
 GameObject:
   m_ObjectHideFlags: 0
@@ -2195,6 +2212,7 @@ GameObject:
   - component: {fileID: 1052953614}
   - component: {fileID: 1052953610}
   - component: {fileID: 1052953608}
+  - component: {fileID: 1052953615}
   m_Layer: 10
   m_Name: Enemy
   m_TagString: Untagged
@@ -2259,7 +2277,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HitSound: EnemyHit
-  PunchPoint: {fileID: 1140098161}
+  PunchPosition: {fileID: 1140098161}
   PunchEffectPrefab: {fileID: 829955639146477814, guid: 0666feffc10aba04e9f0b32fc0ee75a4,
     type: 3}
   PunchHitDelay: 0.5
@@ -2277,6 +2295,7 @@ Transform:
   m_Children:
   - {fileID: 791651323}
   - {fileID: 1140098161}
+  - {fileID: 1329566898}
   m_Father: {fileID: 1010060598}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2323,6 +2342,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AngularSpeed: 5
+--- !u!114 &1052953615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1052953607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 335881b193b953b4abb9ca8d751111b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HealthUIPrefab: {fileID: 7097561509873794964, guid: 81fafaa58739c0144942a78caacc4e3a,
+    type: 3}
+  HealthPosition: {fileID: 1329566898}
 --- !u!1 &1125651123
 GameObject:
   m_ObjectHideFlags: 0
@@ -2410,7 +2444,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1140098161}
   m_Layer: 10
-  m_Name: PunchPoint
+  m_Name: PunchPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2675,6 +2709,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1228576195}
   m_CullTransparentMesh: 0
+--- !u!1 &1254443387
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1254443388}
+  m_Layer: 0
+  m_Name: HealthPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1254443388
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1254443387}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.937, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 220803813}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1276844921 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4561180218827244, guid: 7394d843515dd1f4e80c3fa605d074df,
@@ -2687,6 +2751,36 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1476749711}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1329566897
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1329566898}
+  m_Layer: 10
+  m_Name: HealthPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1329566898
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1329566897}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.76, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1052953611}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1330438550
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3960,7 +4054,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1578608176}
   m_Layer: 0
-  m_Name: PunchPoint
+  m_Name: PunchPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

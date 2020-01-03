@@ -10,7 +10,7 @@ namespace NavGame.Character
     public class MeleeCombatController : MonoBehaviour
     {
         public string HitSound;
-        public Transform PunchPoint;
+        public Transform PunchPosition;
         public GameObject PunchEffectPrefab;
         public float PunchHitDelay = 0.5f;
         public float CombatCooldown = 5f;
@@ -76,9 +76,9 @@ namespace NavGame.Character
 
                 AudioManager.instance.Play(HitSound, transform.position);
 
-                if (PunchPoint != null && PunchEffectPrefab != null)
+                if (PunchPosition != null && PunchEffectPrefab != null)
                 {
-                    Instantiate(PunchEffectPrefab, PunchPoint.position, Quaternion.identity);
+                    Instantiate(PunchEffectPrefab, PunchPosition.position, Quaternion.identity);
                 }
 
                 if (OnMeleeAttackHit != null)

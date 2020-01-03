@@ -28,10 +28,10 @@ namespace NavGame.Character
             }
 
             if (CurrentHealth <= 0) {
-                Die();
                 if (OnDied != null) {
                     OnDied();
                 }
+                Die();
             }
         }
 
