@@ -1703,6 +1703,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88e87affc7ef4764a871087d93cbb321, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UIStudentText: {fileID: 99271626}
+  UIBookText: {fileID: 1125651125}
   BookSpawnPoints:
   - {fileID: 1781008647}
   - {fileID: 1200002201}
