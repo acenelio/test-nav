@@ -72,11 +72,11 @@ public class AggroableEnemy : Character
         {
             AudioManager.instance.Play(PickupAudio, transform.position);
             Instantiate(SavedParticles, transform.position, Quaternion.identity);
+            Destroy(gameObject);
             if (OnCharacterSaved != null)
             {
-                OnCharacterSaved(this);
+                OnCharacterSaved();
             }
-            Destroy(gameObject);
         }
     }
 

@@ -4798,7 +4798,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4805980329800865730}
-  - component: {fileID: 4805980329800865728}
+  - component: {fileID: 8424867277309033201}
   - component: {fileID: 4805980329800865731}
   m_Layer: 11
   m_Name: BookPickup
@@ -4823,7 +4823,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4805980329800865728
+--- !u!114 &8424867277309033201
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4832,13 +4832,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 4805980329800865757}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b11d02603995db34b83500f0d7748222, type: 3}
+  m_Script: {fileID: 11500000, guid: 40dd5956c12b1c743aad28f6ca087abf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ContactRadius: 1.5
   PickupSound: CoinPickup
   ParticlesPrefab: {fileID: 8112824005265639227, guid: 504e4be07316e9845b24de3fd67b9cba,
     type: 3}
+  Amount: 10
 --- !u!135 &4805980329800865731
 SphereCollider:
   m_ObjectHideFlags: 0

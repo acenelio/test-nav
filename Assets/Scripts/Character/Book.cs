@@ -8,6 +8,7 @@ public class Book : Collectible
 {
     public string PickupSound;
     public GameObject ParticlesPrefab;
+    public int Amount = 10;
 
     protected override void DoActionOnPickup() {
         AudioManager.instance.Play(PickupSound, transform.position);

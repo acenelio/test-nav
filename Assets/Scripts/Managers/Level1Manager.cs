@@ -55,8 +55,10 @@ public class Level1Manager : MonoBehaviour
     void SpawnBook(int i)
     {
         Books[i] = Instantiate(BookPrefab, BookSpawnPoints[i].position, Quaternion.identity) as GameObject;
-        Collectible collectible = Books[i].GetComponent<Collectible>();
-        collectible.OnPickup += col => { StartCoroutine(RespawnBook(i)); };
+        Book book = Books[i].GetComponent<Book>();
+        book.OnPickup += () => { StartCoroutine(RespawnBook(i)); };
+        book.OnPickup += () => { AddBooks(book.Amount); };
+        book.OnPickup += UpdateHudBooks;
     }
 
     IEnumerator RespawnBook(int i)
@@ -78,8 +80,8 @@ public class Level1Manager : MonoBehaviour
         Enemies[i] = Instantiate(EnemyPrefab, EnemySpawnPoints[i].position, Quaternion.identity) as GameObject;
         AggroableEnemy character = Enemies[i].GetComponent<AggroableEnemy>();
         character.OnDied += () => { StartCoroutine(RespawnEnemy(i)); };
-        character.OnCharacterSaved += ch => { AddStudent(); };
-        character.OnCharacterSaved += ch => { UpdateHudStudents(); };
+        character.OnCharacterSaved += AddStudent;
+        character.OnCharacterSaved += UpdateHudStudents;
     }
 
     IEnumerator RespawnEnemy(int i)

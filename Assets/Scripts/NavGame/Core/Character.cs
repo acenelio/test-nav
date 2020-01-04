@@ -35,10 +35,10 @@ namespace NavGame.Core
 
             if (CurrentHealth <= 0) {
                 IsDead = true;
+                Die();
                 if (OnDied != null) {
                     OnDied();
                 }
-                Die();
             }
         }
 

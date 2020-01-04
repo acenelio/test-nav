@@ -10,10 +10,10 @@ namespace NavGame.Core
         public OnPickupEvent OnPickup;
 
         public void Pickup() {
-            if (OnPickup != null) {
-                OnPickup(this);
-            }
             DoActionOnPickup();
+            if (OnPickup != null) {
+                OnPickup();
+            }
         }
 
         protected abstract void DoActionOnPickup();
