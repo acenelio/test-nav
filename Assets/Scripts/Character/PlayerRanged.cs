@@ -66,15 +66,25 @@ public class PlayerRanged : Character
             locomotionController.MoveToCharacter(EnemyTarget);
             locomotionController.FaceObjectFrame(EnemyTarget.transform);
             float distance = Vector3.Distance(EnemyTarget.transform.position, transform.position);
-            if (Ammo > 0 && distance <= EnemyTarget.ContactRadius + Stats.RangedRange)
+            if (distance <= EnemyTarget.ContactRadius + Stats.RangedRange)
             {
-                locomotionController.CancelMove();
-                combatController.RangedAttack(EnemyTarget);
+                if (Ammo > 0)
+                {
+                    locomotionController.CancelMove();
+                    combatController.RangedAttack(EnemyTarget);
+                }
+                else
+                {
+                    AudioManager.instance.Play("Error1", transform.position);
+                    LevelManager.instance.ShowWarning("Out of books", 2f);
+                    EnemyTarget = null;
+                }
             }
         }
         else if (PickupTarget != null)
         {
             locomotionController.MoveToCollectible(PickupTarget);
+            locomotionController.FaceObjectFrame(PickupTarget.transform);
             float distance = Vector3.Distance(PickupTarget.transform.position, transform.position);
             if (distance <= PickupTarget.ContactRadius)
             {

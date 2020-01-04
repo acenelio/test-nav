@@ -4,10 +4,8 @@ using UnityEngine;
 using NavGame.Core;
 using UnityEngine.UI;
 
-public class Level1Manager : MonoBehaviour
+public class Level1Manager : LevelManager
 {
-    public static Level1Manager instance;
-
     public Text UIStudentText;
     public Text UIBookText;
 
@@ -28,14 +26,6 @@ public class Level1Manager : MonoBehaviour
 
     PlayerRanged PlayerScript;
 
-    void Awake() {
-        if (instance == null) {
-            instance = this;
-        }
-        else {
-            Destroy(gameObject);
-        }
-    }
 
     void Start()
     {
