@@ -112,7 +112,6 @@ namespace NavGame.Core
 
         public void LeaveCombat()
         {
-            Debug.Log("LeaveCombat would be triggered. Self: " + gameObject.name);
             IsInCombat = false;
             if (OnLeaveCombat != null)
             {

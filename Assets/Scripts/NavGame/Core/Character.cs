@@ -27,7 +27,6 @@ namespace NavGame.Core
             damage = Mathf.Clamp(damage, 1, int.MaxValue);
 
             CurrentHealth -= damage;
-            Debug.Log(transform.name + " takes " + damage + " damage");
 
             if (OnHealthChanged != null) {
                 OnHealthChanged(Stats.MaxHealth, CurrentHealth);

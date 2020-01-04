@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 5894069079824822592}
   - component: {fileID: 5894069079824822599}
   - component: {fileID: 5894069079824822616}
+  - component: {fileID: 1104161612028673555}
   m_Layer: 10
   m_Name: Enemy
   m_TagString: Untagged
@@ -123,7 +124,7 @@ MonoBehaviour:
   PunchPosition: {fileID: 5894069081117833529}
   PunchEffectPrefab: {fileID: 829955639146477814, guid: 0666feffc10aba04e9f0b32fc0ee75a4,
     type: 3}
-  PunchHitDelay: 0.5
+  PunchHitDelay: 1.1
   CombatCooldown: 5
 --- !u!114 &5894069079824822592
 MonoBehaviour:
@@ -141,7 +142,7 @@ MonoBehaviour:
     MaxHealth: 40
     Damage: 10
     Armor: 1
-    AttackSpeed: 1
+    AttackSpeed: 0.7
     MeleeRange: 1
     RangedRange: 5
   ContactRadius: 1.5
@@ -175,6 +176,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cd84bd589c3fa7f4bb93b4345a117195, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  smoothness: 0.1
+--- !u!114 &1104161612028673555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5894069079824822607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 846fd9097802c7448baef6619de5a5f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   smoothness: 0.1

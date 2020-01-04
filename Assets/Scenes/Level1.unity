@@ -436,13 +436,14 @@ MonoBehaviour:
     MaxHealth: 100
     Damage: 10
     Armor: 1
-    AttackSpeed: 3
+    AttackSpeed: 2
     MeleeRange: 1
     RangedRange: 5
   ContactRadius: 1.5
   CurrentHealth: 0
   RayRange: 1000
   FacingAngle: 30
+  Ammo: 0
   WalkableLayer:
     serializedVersion: 2
     m_Bits: 512
@@ -565,7 +566,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 220803811}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd84bd589c3fa7f4bb93b4345a117195, type: 3}
+  m_Script: {fileID: 11500000, guid: 14bfb5be4c82ec848998696dbe281e0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   smoothness: 0.1
@@ -1720,7 +1721,7 @@ MonoBehaviour:
     type: 3}
   EnemyPrefab: {fileID: 5894069079824822607, guid: dc5453e4a4b008b49b09b898b3240d6b,
     type: 3}
-  BookRespawnDelay: 45
+  BookRespawnDelay: 35
   EnemyRespawnDelay: 5
 --- !u!114 &1587654018
 MonoBehaviour:
@@ -2149,7 +2150,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2059224910}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.35, y: 0, z: -3.93}
+  m_LocalPosition: {x: 12.37, y: 0, z: -0.09}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2015312384}
