@@ -20,5 +20,8 @@ namespace NavGame.Core
     public delegate void OnLeaveCombatEvent();
 
     // COLLECTIBLE EVENTS
-    public delegate void OnPickupEvent();
+    public delegate void OnPickupEvent(Collectible collectible);
+
+    // MISC
+    public delegate void OnCharacterSavedEvent(Character character);
 }

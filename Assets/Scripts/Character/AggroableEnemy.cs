@@ -1,27 +1,44 @@
 ﻿using UnityEngine;
 using NavGame.Core;
+using NavGame.Managers;
 
 [RequireComponent(typeof(LocomotionController))]
 [RequireComponent(typeof(MeleeCombatController))]
 public class AggroableEnemy : Character
 {
     public float AggroRadius = 6f;
+    public GameObject SavedParticles;
+
+    public string PickupAudio;
 
     Character Target;
+    Transform SaveTransform;
 
     LocomotionController locomotionController;
     MeleeCombatController combatController;
+
+    bool IsSaved = false;
+
+    public OnCharacterSavedEvent OnCharacterSaved;
 
     void Start()
     {
         Target = PlayerManager.instance.GetPlayer().GetComponent<PlayerRanged>();
         locomotionController = GetComponent<LocomotionController>();
         combatController = GetComponent<MeleeCombatController>();
+
+        GameObject bus = GameObject.Find("Bus");
+        if (bus == null)
+        {
+            Debug.LogError("AggroableEnemy could not find Bus object. Destroying gameObject");
+            Destroy(gameObject);
+        }
+        SaveTransform = bus.transform;
     }
 
     void Update()
     {
-        if (Target == null)
+        if (IsSaved || Target == null)
         {
             return;
         }
@@ -32,7 +49,8 @@ public class AggroableEnemy : Character
         {
             locomotionController.MoveToCharacter(Target);
             locomotionController.FaceObjectFrame(Target.transform);
-            if (distance <= Target.ContactRadius) {
+            if (distance <= Target.ContactRadius)
+            {
                 combatController.MeleeAttack(Target);
             }
         }
@@ -42,8 +60,24 @@ public class AggroableEnemy : Character
         }
     }
 
-    protected override void Die() {
-        Destroy(gameObject);
+    protected override void Die()
+    {
+        IsSaved = true;
+        locomotionController.MoveToPoint(SaveTransform.position);
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Bus")
+        {
+            AudioManager.instance.Play(PickupAudio, transform.position);
+            Instantiate(SavedParticles, transform.position, Quaternion.identity);
+            if (OnCharacterSaved != null)
+            {
+                OnCharacterSaved(this);
+            }
+            Destroy(gameObject);
+        }
     }
 
     void OnDrawGizmosSelected()

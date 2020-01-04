@@ -7,7 +7,8 @@ namespace NavGame.Core
     public class RangedCombatController : MonoBehaviour
     {
         public string CastSound;
-        public Transform CastPosition;
+        public string ProjectHitSound;
+        public Transform CastTransform;
         public GameObject ProjectilePrefab;
         public float CastDelay = 0.5f;
         public float CombatCooldown = 5f;
@@ -65,15 +66,16 @@ namespace NavGame.Core
             yield return new WaitForSeconds(delay);
             if (targetCharacter != null) // target may have died during delay
             {
+                AudioManager.instance.Play(CastSound, CastTransform.position);
                 Cast(targetCharacter);
             }
         }
 
         void Cast(Character targetCharacter)
         {
-            GameObject projectile = Instantiate(ProjectilePrefab, CastPosition.position, Quaternion.identity) as GameObject;
+            GameObject projectile = Instantiate(ProjectilePrefab, CastTransform.position, Quaternion.identity) as GameObject;
             ProjectileController controller = projectile.GetComponent<ProjectileController>();
-            controller.Init(targetCharacter, Self.Stats.Damage);
+            controller.Init(targetCharacter, Self.Stats.Damage, ProjectHitSound);
         }
 
         void DecreaseAttackCooldown()

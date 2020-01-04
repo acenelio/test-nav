@@ -12,7 +12,7 @@ namespace NavGame.Core
         public GameObject HealthUIPrefab;
         public Transform HealthPosition;
 
-        Transform HealthUI;
+        GameObject HealthUI;
         Image HealthSlider;
         Transform Cam;
 
@@ -26,8 +26,8 @@ namespace NavGame.Core
                 throw new Exception("A WorldSpace Canvas is needed to use HealthUIController");
             }
             Cam = Camera.main.transform;
-            HealthUI = Instantiate(HealthUIPrefab, canvas.transform).transform;
-            HealthSlider = HealthUI.GetChild(0).GetComponent<Image>();
+            HealthUI = Instantiate(HealthUIPrefab, canvas.transform);
+            HealthSlider = HealthUI.transform.GetChild(0).GetComponent<Image>();
             //HealthUI.gameObject.SetActive(true);
 
             character = GetComponent<Character>();
@@ -39,8 +39,8 @@ namespace NavGame.Core
         {
             if (HealthUI != null)
             {
-                HealthUI.position = HealthPosition.position;
-                HealthUI.forward = -Cam.forward;
+                HealthUI.transform.position = HealthPosition.position;
+                HealthUI.transform.forward = -Cam.forward;
             }
         }
 
@@ -57,7 +57,10 @@ namespace NavGame.Core
 
         void DestroyUI()
         {
-            Destroy(HealthUI.gameObject);
+            if (HealthUI != null) 
+            {
+                Destroy(HealthUI);
+            }
         }
 
         Canvas FindWorldSpaceCamera()

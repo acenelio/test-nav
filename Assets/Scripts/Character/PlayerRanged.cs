@@ -6,7 +6,6 @@ using NavGame.Managers;
 [RequireComponent(typeof(RangedCombatController))]
 public class PlayerRanged : Character
 {
-    public float AttackRange = 8f;
     public int RayRange = 1000;
     public float FacingAngle = 30f;
 
@@ -30,7 +29,7 @@ public class PlayerRanged : Character
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
         {
             Ray ray = Cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
@@ -66,7 +65,7 @@ public class PlayerRanged : Character
             locomotionController.MoveToCharacter(EnemyTarget);
             locomotionController.FaceObjectFrame(EnemyTarget.transform);
             float distance = Vector3.Distance(EnemyTarget.transform.position, transform.position);
-            if (distance <= EnemyTarget.ContactRadius + AttackRange)
+            if (distance <= EnemyTarget.ContactRadius + Stats.RangedRange)
             {
                 locomotionController.CancelMove();
                 combatController.RangedAttack(EnemyTarget);
@@ -94,6 +93,6 @@ public class PlayerRanged : Character
         Gizmos.color = Color.grey;
         Gizmos.DrawWireSphere(transform.position, ContactRadius);
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, AttackRange);
+        Gizmos.DrawWireSphere(transform.position, Stats.RangedRange);
     }
 }

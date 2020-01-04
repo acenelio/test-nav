@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using NavGame.Managers;
 
 namespace NavGame.Core
 {
@@ -12,6 +13,7 @@ namespace NavGame.Core
         public bool FaceTarget = false;
         public Character Target;
         Transform TargetHit;
+        string ProjectHitSound;
         bool IsInit = false;
 
         public GameObject HitParticles;
@@ -53,12 +55,13 @@ namespace NavGame.Core
                 {
                     targetCharacter.TakeDamage(Damage);
                 }
+                AudioManager.instance.Play(ProjectHitSound, other.gameObject.transform.position);
                 Instantiate(HitParticles, transform.position, Quaternion.identity);
                 Destroy(gameObject);
             }
         }
 
-        public void Init(Character target, int damage)
+        public void Init(Character target, int damage, string projectHitSound)
         {
             Target = target;
             TargetHit = target.gameObject.transform.Find("HitPoint");
@@ -67,6 +70,7 @@ namespace NavGame.Core
                 TargetHit = target.gameObject.transform;
             }
             Damage = damage;
+            ProjectHitSound = projectHitSound;
             IsInit = true;
         }
 
