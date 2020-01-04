@@ -1,6 +1,5 @@
 ﻿using System;
-public class LevelData 
+public class Level1Data 
 {
-    public int BookCount = 0;
     public int StudentCount = 0;
 }

@@ -68,6 +68,10 @@ namespace NavGame.Core
             {
                 AudioManager.instance.Play(CastSound, CastTransform.position);
                 Cast(targetCharacter);
+                if (OnRangedAttackCast != null)
+                {
+                    OnRangedAttackCast();
+                }
             }
         }
 

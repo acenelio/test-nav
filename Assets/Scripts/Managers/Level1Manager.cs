@@ -24,7 +24,9 @@ public class Level1Manager : MonoBehaviour
 
     public float EnemyRespawnDelay = 10f;
 
-    LevelData Data;
+    Level1Data LevelData;
+
+    PlayerRanged PlayerScript;
 
     void Awake() {
         if (instance == null) {
@@ -37,11 +39,19 @@ public class Level1Manager : MonoBehaviour
 
     void Start()
     {
-        Data = new LevelData();
+        LevelData = new Level1Data();
         Books = new GameObject[BookSpawnPoints.Length];
         Enemies = new GameObject[EnemySpawnPoints.Length];
         SpawnBooks();
         SpawnEnemies();
+
+        GameObject player = PlayerManager.instance.GetPlayer();
+        PlayerScript = player.GetComponent<PlayerRanged>();
+        RangedCombatController combatController = player.GetComponent<RangedCombatController>();
+        combatController.OnRangedAttackCast += DecrementBooks;
+        combatController.OnRangedAttackCast += UpdateHudBooks;
+
+        UpdateHud();
     }
 
     void SpawnBooks()
@@ -92,22 +102,30 @@ public class Level1Manager : MonoBehaviour
 
     void AddStudent()
     {
-        Data.StudentCount++;
+        LevelData.StudentCount++;
     }
 
     void AddBooks(int count)
     {
-        Data.BookCount += count;
+        PlayerScript.Ammo += count;
+    }
+
+    void DecrementBooks()
+    {
+        if (PlayerScript.Ammo > 0)
+        {
+            PlayerScript.Ammo--;
+        }
     }
 
     void UpdateHudStudents()
     {
-        UIStudentText.text = "x " + Data.StudentCount;
+        UIStudentText.text = "x " + LevelData.StudentCount;
     }
 
     void UpdateHudBooks()
     {
-        UIBookText.text = "x " + Data.BookCount;
+        UIBookText.text = "x " + PlayerScript.Ammo;
     }    
 
     void UpdateHud() 

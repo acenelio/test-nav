@@ -8,6 +8,7 @@ public class PlayerRanged : Character
 {
     public int RayRange = 1000;
     public float FacingAngle = 30f;
+    public int Ammo = 0;
 
     public LayerMask WalkableLayer;
     public LayerMask EnemyLayer;
@@ -65,7 +66,7 @@ public class PlayerRanged : Character
             locomotionController.MoveToCharacter(EnemyTarget);
             locomotionController.FaceObjectFrame(EnemyTarget.transform);
             float distance = Vector3.Distance(EnemyTarget.transform.position, transform.position);
-            if (distance <= EnemyTarget.ContactRadius + Stats.RangedRange)
+            if (Ammo > 0 && distance <= EnemyTarget.ContactRadius + Stats.RangedRange)
             {
                 locomotionController.CancelMove();
                 combatController.RangedAttack(EnemyTarget);
