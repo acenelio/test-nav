@@ -60,7 +60,7 @@ public class PlayerRanged : Character
             }
         }
 
-        if (EnemyTarget != null)
+        if (EnemyTarget != null && EnemyTarget.IsDead == false)
         {
             locomotionController.MoveToCharacter(EnemyTarget);
             locomotionController.FaceObjectFrame(EnemyTarget.transform);

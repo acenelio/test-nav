@@ -11,11 +11,17 @@ namespace NavGame.Core
         public OnHealthChangedEvent OnHealthChanged;
         public OnDiedEvent OnDied;
 
+        public bool IsDead { get; private set; } = false;
+
         void Awake () {
             CurrentHealth = Stats.MaxHealth;
         }
 
         public void TakeDamage(int damage) {
+
+            if (IsDead) {
+                return;
+            }
 
             damage -= Stats.Armor;
             damage = Mathf.Clamp(damage, 1, int.MaxValue);
@@ -28,6 +34,7 @@ namespace NavGame.Core
             }
 
             if (CurrentHealth <= 0) {
+                IsDead = true;
                 if (OnDied != null) {
                     OnDied();
                 }

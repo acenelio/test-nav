@@ -23,43 +23,49 @@ public class Level1Manager : MonoBehaviour
     {
         Books = new GameObject[BookSpawnPoints.Length];
         Enemies = new GameObject[EnemySpawnPoints.Length];
-        StartCoroutine(SpawnBooks());
-        StartCoroutine(SpawnEnemies());
+        SpawnBooks();
+        SpawnEnemies();
     }
 
-    IEnumerator SpawnBooks()
+    void SpawnBooks()
     {
-        while (true)
+        for (int i = 0; i < BookSpawnPoints.Length; i++)
         {
-            for (int i = 0; i < BookSpawnPoints.Length; i++)
-            {
-                if (Books[i] == null)
-                {
-                    Books[i] = Instantiate(BookPrefab, BookSpawnPoints[i].position, Quaternion.identity);
-                    Collectible collectible = Books[i].GetComponent<Collectible>();
-                    int index = i;
-                    collectible.OnPickup += col => { Books[index] = null; };
-                }
-                else
-                {
-                    Debug.Log("Nao era nulo: " + i);
-                }
-                yield return new WaitForSeconds(BookRespawnDelay);
-            }
+            SpawnBook(i);
         }
     }
 
-    IEnumerator SpawnEnemies()
+    void SpawnBook(int i)
     {
+        Books[i] = Instantiate(BookPrefab, BookSpawnPoints[i].position, Quaternion.identity) as GameObject;
+        Collectible collectible = Books[i].GetComponent<Collectible>();
+        collectible.OnPickup += col => { StartCoroutine(RespawnBook(i)); };
+    }
 
-            for (int i = 0; i < EnemySpawnPoints.Length; i++)
-            {
-                if (Enemies[i] != null)
-                {
-                    Enemies[i] = Instantiate(EnemyPrefab, EnemySpawnPoints[i].position, Quaternion.identity) as GameObject;
-                }
-                yield return new WaitForSeconds(EnemyRespawnDelay);
-            }
-        
+    IEnumerator RespawnBook(int i)
+    {
+        yield return new WaitForSeconds(BookRespawnDelay);
+        SpawnBook(i);
+    }
+
+    void SpawnEnemies()
+    {
+        for (int i = 0; i < EnemySpawnPoints.Length; i++)
+        {
+            SpawnEnemy(i);
+        }
+    }
+
+    void SpawnEnemy(int i)
+    {
+        Enemies[i] = Instantiate(EnemyPrefab, EnemySpawnPoints[i].position, Quaternion.identity) as GameObject;
+        Character character = Enemies[i].GetComponent<Character>();
+        character.OnDied += () => { StartCoroutine(RespawnEnemy(i)); };
+    }
+
+    IEnumerator RespawnEnemy(int i)
+    {
+        yield return new WaitForSeconds(EnemyRespawnDelay);
+        SpawnEnemy(i);
     }
 }
