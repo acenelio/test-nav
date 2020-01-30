@@ -57,6 +57,7 @@ namespace NavGame.Core
 
         void DestroyUI()
         {
+            Debug.Log("DestroyUI chamado");
             if (HealthUI != null) 
             {
                 Destroy(HealthUI);

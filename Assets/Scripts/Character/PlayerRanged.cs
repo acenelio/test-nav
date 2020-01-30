@@ -7,6 +7,7 @@ using NavGame.Managers;
 public class PlayerRanged : Character
 {
     public int RayRange = 1000;
+    public float Tolerance = 0.2f;
     public float FacingAngle = 30f;
     public int Ammo = 0;
 
@@ -66,7 +67,7 @@ public class PlayerRanged : Character
             locomotionController.MoveToCharacter(EnemyTarget);
             locomotionController.FaceObjectFrame(EnemyTarget.transform);
             float distance = Vector3.Distance(EnemyTarget.transform.position, transform.position);
-            if (distance <= EnemyTarget.ContactRadius + Stats.RangedRange)
+            if (distance <= EnemyTarget.ContactRadius + Stats.RangedRange + Tolerance)
             {
                 if (Ammo > 0)
                 {
@@ -86,7 +87,7 @@ public class PlayerRanged : Character
             locomotionController.MoveToCollectible(PickupTarget);
             locomotionController.FaceObjectFrame(PickupTarget.transform);
             float distance = Vector3.Distance(PickupTarget.transform.position, transform.position);
-            if (distance <= PickupTarget.ContactRadius)
+            if (distance <= PickupTarget.ContactRadius + Tolerance)
             {
                 PickupTarget.Pickup();
                 PickupTarget = null;
@@ -96,6 +97,7 @@ public class PlayerRanged : Character
 
     protected override void Die()
     {
+        base.Die();
         NavigationManager.instance.ReloadCurrentScene();
     }
 

@@ -6,17 +6,21 @@ using UnityEngine.UI;
 
 public class Level1Manager : LevelManager
 {
+    public float EnemySpawnWaitTime = 1f;
+    public float EnemySpawnInitialWait = 2f;
     public Text UIStudentText;
     public Text UIBookText;
 
     public Transform[] BookSpawnPoints;
     public Transform[] EnemySpawnPoints;
+    public Transform[] Destinations;
 
-    public GameObject[] Books;
-    GameObject[] Enemies;
+    //GameObject[] Books;
+    //GameObject[] Enemies;
 
     public GameObject BookPrefab;
     public GameObject EnemyPrefab;
+    
 
     public float BookRespawnDelay = 10f;
 
@@ -26,14 +30,17 @@ public class Level1Manager : LevelManager
 
     PlayerRanged PlayerScript;
 
+    System.Random rand = new System.Random();
+
+    bool Phase1;
 
     void Start()
     {
         LevelData = new Level1Data();
-        Books = new GameObject[BookSpawnPoints.Length];
-        Enemies = new GameObject[EnemySpawnPoints.Length];
+        //Books = new GameObject[BookSpawnPoints.Length];
+        //Enemies = new GameObject[EnemySpawnPoints.Length];
         SpawnBooks();
-        SpawnEnemies();
+        StartCoroutine(SpawnEnemies());
 
         GameObject player = PlayerManager.instance.GetPlayer();
         PlayerScript = player.GetComponent<PlayerRanged>();
@@ -42,6 +49,7 @@ public class Level1Manager : LevelManager
         combatController.OnRangedAttackCast += UpdateHudBooks;
 
         UpdateHud();
+        Phase1 = true;
     }
 
     void SpawnBooks()
@@ -54,8 +62,8 @@ public class Level1Manager : LevelManager
 
     void SpawnBook(int i)
     {
-        Books[i] = Instantiate(BookPrefab, BookSpawnPoints[i].position, Quaternion.identity) as GameObject;
-        Book book = Books[i].GetComponent<Book>();
+        GameObject newBook = Instantiate(BookPrefab, BookSpawnPoints[i].position, Quaternion.identity) as GameObject;
+        Book book = newBook.GetComponent<Book>();
         book.OnPickup += () => { StartCoroutine(RespawnBook(i)); };
         book.OnPickup += () => { AddBooks(book.Amount); };
         book.OnPickup += UpdateHudBooks;
@@ -67,24 +75,33 @@ public class Level1Manager : LevelManager
         SpawnBook(i);
     }
 
-    void SpawnEnemies()
+    IEnumerator SpawnEnemies()
     {
-        for (int i = 0; i < EnemySpawnPoints.Length; i++)
-        {
-            SpawnEnemy(i);
+        yield return new WaitForSeconds(EnemySpawnInitialWait);
+        while (Phase1) {
+            for (int i = 0; Phase1 && i < EnemySpawnPoints.Length; i++)
+            {
+                SpawnEnemy(i);
+                yield return new WaitForSeconds(EnemySpawnWaitTime);
+            }
         }
     }
 
     void SpawnEnemy(int i)
     {
-        Enemies[i] = Instantiate(EnemyPrefab, EnemySpawnPoints[i].position, Quaternion.identity) as GameObject;
-        AggroableEnemy character = Enemies[i].GetComponent<AggroableEnemy>();
-        character.OnDied += () => { StartCoroutine(RespawnEnemy(i)); };
-        character.OnCharacterSaved += AddStudent;
-        character.OnCharacterSaved += UpdateHudStudents;
+        GameObject newEnemy = Instantiate(EnemyPrefab, EnemySpawnPoints[i].position, Quaternion.identity) as GameObject;
+        KamikazeEnemy script = newEnemy.GetComponent<KamikazeEnemy>();
+        
+        int randomIndex = rand.Next(Destinations.Length); 
+        script.Init(Destinations[randomIndex].position);
+
+        //AggroableEnemy character = Enemies[i].GetComponent<AggroableEnemy>();
+        //character.OnDied += () => { StartCoroutine(RespawnEnemy(i)); };
+        //character.OnCharacterSaved += AddStudent;
+        //character.OnCharacterSaved += UpdateHudStudents;
     }
 
-    IEnumerator RespawnEnemy(int i)
+    IEnumerator RespawnEnemyXXX(int i)
     {
         yield return new WaitForSeconds(EnemyRespawnDelay);
         SpawnEnemy(i);

@@ -22,4 +22,5 @@ namespace NavGame.Core
     // MISC
     public delegate void OnPickupEvent();
     public delegate void OnCharacterSavedEvent();
+    public delegate void OnReachBossAreaEvent();
 }

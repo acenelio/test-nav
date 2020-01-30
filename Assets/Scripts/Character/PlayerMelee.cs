@@ -84,6 +84,7 @@ public class PlayerMelee : Character
 
     protected override void Die()
     {
+        base.Die();
         NavigationManager.instance.ReloadCurrentScene();
     }
 

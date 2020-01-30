@@ -7,19 +7,22 @@ namespace NavGame.Core
         public CharacterStats Stats;
         public float ContactRadius = 1.5f;
         public int CurrentHealth;
-        
+
         public OnHealthChangedEvent OnHealthChanged;
         public OnDiedEvent OnDied;
 
         public bool IsDead { get; private set; } = false;
 
-        void Awake () {
+        void Awake()
+        {
             CurrentHealth = Stats.MaxHealth;
         }
 
-        public void TakeDamage(int damage) {
+        public void TakeDamage(int damage)
+        {
 
-            if (IsDead) {
+            if (IsDead)
+            {
                 return;
             }
 
@@ -28,19 +31,24 @@ namespace NavGame.Core
 
             CurrentHealth -= damage;
 
-            if (OnHealthChanged != null) {
+            if (OnHealthChanged != null)
+            {
                 OnHealthChanged(Stats.MaxHealth, CurrentHealth);
             }
 
-            if (CurrentHealth <= 0) {
+            if (CurrentHealth <= 0)
+            {
                 IsDead = true;
                 Die();
-                if (OnDied != null) {
-                    OnDied();
-                }
             }
         }
 
-        protected abstract void Die();
+        protected virtual void Die()
+        {
+            if (OnDied != null)
+            {
+                OnDied();
+            }
+        }
     }
 }
